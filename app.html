@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="app.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <header class="text-center" style="perspective: 52px;">
+      <button class="btn btn-success btn-sm" id="btnModal" style="transform: rotateX(5deg) rotateY(0deg);
+      transform-style: preserve-3d;  -webkit-box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+      -moz-box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+      box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);"><h1 class="text-center">Fitness app</h1></button>
+    </header>
+    <!--MODAL-->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Modal window 1</p>
+      </div>
+    </div>
+    <!--MODAL RESULTS-->
+    <div id="modalResults" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>all results listed here</p>
+        <span class="form-control" id="calories-result-all">Result:</span>
+        <span class="form-control" id="volume-result-all">Volume:</span>
+      </div>
+    </div>
+    <!--FLIP CARD-->
+    <div class="flip-card-3D-wrapper">
+      <div id="flip-card">
+        <div class="flip-card-front">
+          <button class="btn btn-primary" id="flip-card-btn-turn-to-back">></button>
+          <div class="popup" onclick="popup()"><h3>Calorie <br> calculator </h3><span class="popuptext" id="caloriePopup">The Calorie Calculator can be used to estimate the number of calories a person needs to consume each day. This calculator can also provide some simple guidelines for gaining or losing weight.</span></div>
+          
+          <div class="row p-1">
+            <div class="col-4"><label class="" for="">Weight:</label></div>
+            <div class="col-8"><input type="text" class="form-control form-control-sm text-center" id="weight" placeholder="kg"></div>
+          </div>
+          
+          <div class="row p-1">
+            <div class="col-4"><label for="">Height:</label></div>
+            <div class="col-8"><input type="text" class="form-control form-control-sm text-center" id="height" placeholder="cm"></div>
+          </div>
+
+          <div class="row p-1">
+            <div class="col-4"><label for="">Age:</label></div>
+            <div class="col-8"><input type="text" class="form-control form-control-sm text-center" id="age"></div>
+          </div>
+
+          <div class="row p-1">
+            <div class="col-4"><label for="">Gender:</label></div>
+            <div class="col-8"><select name="gender" id="gender" class="form-select form-select-sm"><option value="male">Male</option><option value="female">Female</option></select></div>
+          </div>
+          
+          <div class="row p-1">
+            <div class="col-4"><label for="">Activity:</label></div>
+            <div class="col-8"><select name="" id="activity-lvl" class="form-select form-select-sm"><option value="sedentary">sedentary</option><option value="lightly active">lightly active</option><option value="moderately">moderately</option><option value="very active">very active</option></select></div>
+          </div>
+
+          <br>
+          <button class="btn btn-primary" id="calc-btn" onclick="calculateCalories()">calculate</button>
+          <br><br>
+          <span class="form-control" id="calories-result">Result:</span>
+        </div>
+
+        <div class="flip-card-back">
+          <button class="btn btn-primary" id="flip-card-btn-turn-to-front"><</button>
+          <div class="popup" onclick="popup()"><h3>Volume <br> calculator</h3><span class="popuptext" id="volumePopup">Use training volume as a general guideline. Training volume is most useful when trying to compare 2 different training approaches. If one approach has a far greater weekly training volume, it should throw up a red flag.</span></div>
+          <!-- === VOLUME CONTAINER === -->
+          <div id="volume-container">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <!--Monday-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Monday
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <table id="tableID">
+                      <thead>
+                        <tr>
+                          <th scope="col">exercise</th>
+                          <th scope="col">sets</th>
+                          <th scope="col">reps</th>
+                          <th scope="col">weight</th>
+                        </tr>
+                      </thead>
+                      <tr id="addRow" class="volume-row">
+                        <td><select name="" id="" class="input-table exercises_select"><option value="benchpress" class="benchpress_option">bench press</option><option value="shoulderpress" class="shoulderpress_option">shoulder press</option></select></td>
+                        <td><input class="form-control input-table sets-input" type="text" onkeyup="calcVolume()"></td>
+                        <td><input class="form-control input-table reps-input" type="text" onkeyup="calcVolume()"></td>
+                        <td><input class="form-control input-table weight-input" type="text" onkeyup="calcVolume()"></td>
+                      </tr>
+                    </table>
+                    <input type="text" name="" class="form-control input-table volume-result-all" readonly>
+                    <button class="btn btn-primary btn-sm mt-1 btnAddRow">Add row</button>
+                  </div>
+                </div>
+              </div>
+              <!--Tuesday-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Tuesday
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+
+                  </div>
+                </div>
+              </div>
+              <!--Wednesday-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Wednesday
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+
+                  </div>
+                </div>
+              </div>
+              <!--Thursday-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFour">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    Thursday
+                  </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+
+                  </div>
+                </div>
+              </div>
+              <!--Friday-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFive">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                    Friday
+                  </button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+
+                  </div>
+                </div>
+              </div>
+              <!--Saturday-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingSix">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                    Saturday
+                  </button>
+                </h2>
+                <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+
+                  </div>
+                </div>
+              </div>
+              <!--Sunday-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingSeven">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                    Sunday
+                  </button>
+                </h2>
+                <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-success btn-sm mt-1" id="btnAllResults">Get all results</button>
+          </div>
+          <!-- === VOLUME CONTAINER END === -->
+        </div>
+        
+      </div>
+    </div>
+
+    <footer class="position-absolute bottom-0 end-0"></footer>
+    <script src="app.js"></script>
+    <script src="calories.js"></script>
+    <script src="ex.js"></script>
+    <script src="volume.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
